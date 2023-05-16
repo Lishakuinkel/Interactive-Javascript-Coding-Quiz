@@ -65,14 +65,13 @@ const nameinput = initialsform['name'];
 var submitbtn = document.getElementById("submitbtn");
 var highscoreScreen = document.getElementById("highscores-screen");
 var finishedScreen = document.getElementById("finished-screen");
-
 var finalScore = document.getElementById("finalscore");
  
-
 let score = 0;
 let questionIndex = 0;
 let counter = 60;
-let highscores = [];
+var highscores=[];
+var highScores;
 
 startbtn.addEventListener('click', startQuiz);
 var intervalTracker;
@@ -186,10 +185,9 @@ function showScore() {
 function formSubmit() {
     var inputInitials = document.getElementById("initials").value;
 
-    if (localStorage.length === 0) {
-        const arrObj = [{ initials: inputInitials, score: highscores }]
-        localStorage.setItem('arrObj', JSON.stringify(arrObj));
-    }
+   highScores = JSON.parse(localStorage.getItem("highscores")) || [];
+    highScores.push({name:inputInitials,score:score});
+    localStorage.setItem("highscores", JSON.stringify(highScores));
 }
 
 function handleNextButton() {
@@ -208,6 +206,7 @@ nextbtn.addEventListener('click', handleNextButton);
 function gameover() {
     nextbtn.style.display = "none";
     answerButton.style.display = "none";
+    finishedScreen.style.display = "block";
     questionElement.innerHTML = "GAME OVER! Please refresh your page to start again :)";
     clearInterval(intervalTracker);
 }
@@ -220,11 +219,10 @@ function displayHighscores() {
     
     mainquiz.style.display = "none";
     
-    const highScores = JSON.parse(localStorage.getItem("highscores")) || [];
+    console.log(localStorage);
+    highScoresList.innerHTML = JSON.parse(localStorage.getItem("highscores"));
 
-   for(var i=0; i<highScores.length;i++){
-    console.log(highScores[i]);
-   } 
    
 }
+
 

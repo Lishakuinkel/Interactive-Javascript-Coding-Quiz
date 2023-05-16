@@ -19,7 +19,11 @@
             <p id="timer">Timer : </p>
 
         </div>
-
+        <div id="highscores-screen">
+        <h2 id="highscoresheading">Highscores List: </h2>
+        <ol id="highscoreslist"></ol>
+        
+    </div> 
 
     </div>
 
@@ -48,27 +52,25 @@
             <button id="btn-next">Next</button>
         </div>
 
-        <section class="finished-screen">
+        <section id="finished-screen">
             <h2>All done!</h2>
-            <p>Your final score is
+    
             <h4 id="finalscore">score</h4>
             </p>
 
             <form id = "initialsform">
-                <input type="text" placeholder="Enter your Initials" name="nameinitials" required/>
+                <input type="text" id="initials" placeholder="Enter your Initials" name="nameinitials" required/>
                 <button id="submitbtn">Submit</button>
             </form>
         </section> 
 
     </div>
-    <section id="highscores-screen">
+    <div id="highscores-screen">
         <h2 id="highscoresheading">Highscores : </h2>
         <ol id="highscoreslist"></ol>
         
-    </section> 
-    <div class="end-game">
-        <h1 id="gameover"> Game over </h1>
-    </div>
+    </div> 
+    
 
     <script src="script.js"></script>
 

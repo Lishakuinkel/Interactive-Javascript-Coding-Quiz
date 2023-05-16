@@ -64,8 +64,10 @@ const initialsform = document.getElementById("initialsform");
 const nameinput = initialsform['name'];
 var submitbtn = document.getElementById("submitbtn");
 var highscoreScreen = document.getElementById("highscores-screen");
+var finishedScreen = document.getElementById("finished-screen");
 
-
+var finalScore = document.getElementById("finalscore");
+ 
 
 let score = 0;
 let questionIndex = 0;
@@ -170,11 +172,24 @@ function selectAnswer(e) {
 function showScore() {
     resetState();
     scoredisplay.textContent = score;
-    questionElement.innerHTML = "Your final score is " + score;
+    finishedScreen.style.display = "block";
+    displayQuiz.style.display = "none";
+    finalscore.innerHTML = "Your final score is " + score;
     nextbtn.style.display = "none";
-
+    answerButton.style.display = "none";
     submitbtn.style.display = "block";
     clearInterval(intervalTracker);
+
+    submitbtn.addEventListener('click', formSubmit);
+}
+
+function formSubmit() {
+    var inputInitials = document.getElementById("initials").value;
+
+    if (localStorage.length === 0) {
+        const arrObj = [{ initials: inputInitials, score: highscores }]
+        localStorage.setItem('arrObj', JSON.stringify(arrObj));
+    }
 }
 
 function handleNextButton() {
@@ -189,31 +204,6 @@ function handleNextButton() {
 
 nextbtn.addEventListener('click', handleNextButton);
 
-/*let scorelist = document.createElement('ul'){
-    scorelist.classList.add('highscorelist');
-
-    for (let i=0; i<scorelist.length, i++){
-        let scoreli = document.createElement('li');
-        scoreli.classList.add('scorelist-item');
-        scoreli.textContent = ''
-    }
-}*/
-
-/*highscoresbtn.addEventListener('click', displayHighscores);
-
-function displayHighscores() {
-    nextbtn.style.display="none";
-    answerButton.style.display="none";
-    
-    const highScoresList = document.getElementById("highScoresList");
-    const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
-    
-    highScoresList.innerHTML = highScores
-      .map(score => {
-        return `<li class="high-score">${score.name} - ${score.score}</li>`;
-      })
-      .join("");
-    }*/
 
 function gameover() {
     nextbtn.style.display = "none";
@@ -226,7 +216,9 @@ highscoresbtn.addEventListener('click', displayHighscores);
 
 
 function displayHighscores() {
-    highscoreScreen.style.display = "none";
+    highscoreScreen.style.display = "block";
+    
+    mainquiz.style.display = "none";
     
     const highScores = JSON.parse(localStorage.getItem("highscores")) || [];
 

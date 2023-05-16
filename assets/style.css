@@ -163,7 +163,7 @@ body{
     background: pink;
 }
 
-.finished-screen{
+#finished-screen{
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -179,4 +179,9 @@ body{
 
 #gameover{
     display: none;
+}
+
+#highscoresheading{
+    text-align: center;
+    font-size: 25px;
 }

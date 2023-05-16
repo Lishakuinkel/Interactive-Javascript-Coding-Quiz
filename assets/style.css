@@ -170,7 +170,7 @@ body{
     padding-top: 25%;
 }
 
-.highscores-screen{
+#highscores-screen{
     display: none;
     flex-direction: column;
     justify-content: center;

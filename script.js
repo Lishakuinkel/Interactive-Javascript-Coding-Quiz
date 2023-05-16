@@ -47,7 +47,7 @@ const questions = [
         { text: "1'2''2'", correct: false }]
     }
 ];
-
+//DOM elements
 var questionElement = document.getElementById("question");
 var answerButton = document.getElementById("answerbuttons");
 var startbtn = document.getElementById("btn-start");
@@ -59,23 +59,26 @@ var highscoresbtn = document.getElementById("highscores");
 var displayQuiz = document.getElementById("quiz");
 var mainquiz = document.getElementById("main");
 var gameoverpage = document.getElementById("gameover");
+var highScoresList = document.getElementById("highscoreslist");
+const initialsform = document.getElementById("initialsform");
+const nameinput = initialsform['name'];
+var submitbtn = document.getElementById("submitbtn");
+var highscoreScreen = document.getElementById("highscores-screen");
 
-/*var answer1 = document.getElementById("Answer1");
-var answer2 = document.getElementById("Answer2");
-var answer3 = document.getElementById("Answer3");
-var answer4 = document.getElementById("Answer4");*/
+
 
 let score = 0;
 let questionIndex = 0;
 let counter = 60;
-
+let highscores = [];
 
 startbtn.addEventListener('click', startQuiz);
+var intervalTracker;
 
 function startTimer() {
 
 
-    var d = setInterval(functiontimer, 1000);
+    intervalTracker = setInterval(functiontimer, 1000);  
 
     function functiontimer() {
 
@@ -85,15 +88,14 @@ function startTimer() {
             counter--;
             console.log(counter);
             document.getElementById("timer").innerHTML = "Timer : " + counter;
-            
-        
+
+
         }
 
-        else if (counter == 0){
+       else if (counter == 0) {
             gameover();
+            
 
-        } else {
-            clearInterval(d);
         }
     }
 }
@@ -105,7 +107,7 @@ function startQuiz() {
     welcomeheader.style.display = "none";
     intro.style.display = "none";
     displayQuiz.style.display = "block";
-    
+    highscoreScreen.style.display = "none";
     showQuestion();
     startTimer();
 
@@ -130,8 +132,8 @@ function showQuestion() {
         }
         button.addEventListener('click', selectAnswer);
     });
-}
 
+}
 
 function resetState() {
     startbtn.style.display = "none";
@@ -163,12 +165,16 @@ function selectAnswer(e) {
 
 }
 
+
+
 function showScore() {
     resetState();
     scoredisplay.textContent = score;
     questionElement.innerHTML = "Your final score is " + score;
     nextbtn.style.display = "none";
 
+    submitbtn.style.display = "block";
+    clearInterval(intervalTracker);
 }
 
 function handleNextButton() {
@@ -183,17 +189,50 @@ function handleNextButton() {
 
 nextbtn.addEventListener('click', handleNextButton);
 
-highscoresbtn.addEventListener('click', displayHighscores);
+/*let scorelist = document.createElement('ul'){
+    scorelist.classList.add('highscorelist');
+
+    for (let i=0; i<scorelist.length, i++){
+        let scoreli = document.createElement('li');
+        scoreli.classList.add('scorelist-item');
+        scoreli.textContent = ''
+    }
+}*/
+
+/*highscoresbtn.addEventListener('click', displayHighscores);
 
 function displayHighscores() {
-    
-    var highscorepage = document.createElement("h1");
-    highscorepage.textContent = "Highscores: "
-}
-
-function gameover(){
     nextbtn.style.display="none";
     answerButton.style.display="none";
-    questionElement.innerHTML = "GAME OVER! Please refresh your page to start again :)" ;
     
+    const highScoresList = document.getElementById("highScoresList");
+    const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+    
+    highScoresList.innerHTML = highScores
+      .map(score => {
+        return `<li class="high-score">${score.name} - ${score.score}</li>`;
+      })
+      .join("");
+    }*/
+
+function gameover() {
+    nextbtn.style.display = "none";
+    answerButton.style.display = "none";
+    questionElement.innerHTML = "GAME OVER! Please refresh your page to start again :)";
+    clearInterval(intervalTracker);
 }
+
+highscoresbtn.addEventListener('click', displayHighscores);
+
+
+function displayHighscores() {
+    highscoreScreen.style.display = "none";
+    
+    const highScores = JSON.parse(localStorage.getItem("highscores")) || [];
+
+   for(var i=0; i<highScores.length;i++){
+    console.log(highScores[i]);
+   } 
+   
+}
+

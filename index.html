@@ -54,28 +54,18 @@
             <h4 id="finalscore">score</h4>
             </p>
 
-            <form action="input">
-                <label for="input">Enter your Initials </label>
-                <input type="text">
-                <button>Submit</button>
+            <form id = "initialsform">
+                <input type="text" placeholder="Enter your Initials" name="nameinitials" required/>
+                <button id="submitbtn">Submit</button>
             </form>
-        </section>
-
-        <section class="highscores-screen">
-            <h2>Highscores : </h2>
-            <ol>
-                <li>LK - 10</li>
-                <li>LK - 10</li>
-                <li>LK - 10</li>
-            </ol>
-        </section>
-
-        
-
-
+        </section> 
 
     </div>
-
+    <section id="highscores-screen">
+        <h2 id="highscoresheading">Highscores : </h2>
+        <ol id="highscoreslist"></ol>
+        
+    </section> 
     <div class="end-game">
         <h1 id="gameover"> Game over </h1>
     </div>

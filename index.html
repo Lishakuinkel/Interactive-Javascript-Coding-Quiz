@@ -19,15 +19,17 @@
             <p id="timer">Timer : </p>
 
         </div>
+
+        <!-- inner div for displaying highscores screen -->
         <div id="highscores-screen">
-        <h2 id="highscoresheading">Highscores List: </h2>
-        <ol id="highscoreslist"></ol>
-        
-    </div> 
+            <h2 id="highscoresheading">Highscores List: </h2>
+            <ol id="highscoreslist"></ol>
+
+        </div>
 
     </div>
 
-    <!--div for main quiz content-->
+    <!-- div for main quiz content -->
     <div class="container" id="main">
 
         <h1 id="welcome">Welcome to Javascript Quiz Challenge</h1>
@@ -37,11 +39,11 @@
         </p>
         <button id="btn-start">Click here to start!</button>
 
-        <!--inner div for questions and answers -->
+        <!--inner div for displaying questions and answers -->
         <div id="quiz">
             <h2 id="question">Question</h2> <!--this is where Questions will go-->
 
-            <!--inner div for answers-->
+            <!-- inner div for answer choices -->
             <div id="answerbuttons">
                 <button class="btn" id="Answer1">Answer 1</button><br><br>
                 <button class="btn" id="Answer2">Answer 2</button><br><br>
@@ -52,25 +54,21 @@
             <button id="btn-next">Next</button>
         </div>
 
+        
         <section id="finished-screen">
             <h2>All done!</h2>
-    
+
             <h4 id="finalscore">score</h4>
             </p>
 
-            <form id = "initialsform">
-                <input type="text" id="initials" placeholder="Enter your Initials" name="nameinitials" required/>
+            <form id="initialsform">
+                <input type="text" id="initials" placeholder="Enter your Initials" name="nameinitials" required />
                 <button id="submitbtn">Submit</button>
             </form>
-        </section> 
+        </section>
 
     </div>
-    <div id="highscores-screen">
-        <h2 id="highscoresheading">Highscores : </h2>
-        <ol id="highscoreslist"></ol>
-        
-    </div> 
-    
+
 
     <script src="script.js"></script>
 

@@ -1,8 +1,4 @@
-// WHEN I click the start button THEN a timer starts and I am presented with a question
-// WHEN I answer a question THEN I am presented with another question
-// WHEN I answer a question incorrectly THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0 THEN the game is over
-// WHEN the game is over THEN I can save my initials and my score
+// Creating questions array with all the questions and answers for the quiz //
 const questions = [
     {
         question: "Inside which HTML element do we put the JavaScript?",
@@ -54,7 +50,7 @@ var startbtn = document.getElementById("btn-start");
 var nextbtn = document.getElementById("btn-next");
 var welcomeheader = document.getElementById("welcome");
 var intro = document.getElementById("introguide");
-var scoredisplay = document.getElementById("finalscore");
+
 var highscoresbtn = document.getElementById("highscores");
 var displayQuiz = document.getElementById("quiz");
 var mainquiz = document.getElementById("main");
@@ -66,53 +62,49 @@ var submitbtn = document.getElementById("submitbtn");
 var highscoreScreen = document.getElementById("highscores-screen");
 var finishedScreen = document.getElementById("finished-screen");
 var finalScore = document.getElementById("finalscore");
- 
+
 let score = 0;
+var intervalTracker;
 let questionIndex = 0;
 let counter = 60;
-var highscores=[];
+var highscores = [];
 var highScores;
 
+// startQuiz() is called when startbtn is clicked //
 startbtn.addEventListener('click', startQuiz);
-var intervalTracker;
-
-function startTimer() {
-
-
-    intervalTracker = setInterval(functiontimer, 1000);  
-
-    function functiontimer() {
-
-        // displayTimer();
-
-        if (counter > 0) {
-            counter--;
-            console.log(counter);
-            document.getElementById("timer").innerHTML = "Timer : " + counter;
-
-
-        }
-
-       else if (counter == 0) {
-            gameover();
-            
-
-        }
-    }
-}
 
 function startQuiz() {
-    questionIndex = 0;
-    score = 0;
+
     startbtn.style.display = "none";
     welcomeheader.style.display = "none";
     intro.style.display = "none";
     displayQuiz.style.display = "block";
     highscoreScreen.style.display = "none";
-    showQuestion();
+    
     startTimer();
+    showQuestion(); 
 
 };
+
+
+function startTimer() { 
+    // starts timer as the quiz starts //
+    intervalTracker = setInterval(functiontimer, 1000);
+
+    function functiontimer() {
+
+        if (counter > 0) {
+            counter--;
+            console.log(counter);
+            document.getElementById("timer").innerHTML = "Timer : " + counter;
+        }
+
+        else if (counter == 0) {
+            gameover(); 
+
+        }
+    }
+}
 
 
 function showQuestion() {
@@ -138,6 +130,7 @@ function showQuestion() {
 
 function resetState() {
     startbtn.style.display = "none";
+    // removes previous answer options for each new displayed question //
     while (answerButton.firstChild) {
         answerButton.removeChild(answerButton.firstChild);
     }
@@ -146,14 +139,16 @@ function resetState() {
 function selectAnswer(e) {
     const selectedBtn = e.target;
     const isCorrect = selectedBtn.dataset.correct === "true";
+
+    //checks from questions array if the selected answer has correct = true or false //
     if (isCorrect) {
         selectedBtn.classList.add("correct");
-        score++;
+        score++; // when correct = true//
 
     }
     else {
         selectedBtn.classList.add("incorrect");
-        counter = counter - 10;
+        counter = counter - 10; // reduces timer by 10 secs for each incorrect answers//
     }
 
     Array.from(answerButton.children).forEach(button => {
@@ -167,34 +162,42 @@ function selectAnswer(e) {
 }
 
 
-
 function showScore() {
     resetState();
-    scoredisplay.textContent = score;
+
+  
     finishedScreen.style.display = "block";
     displayQuiz.style.display = "none";
-    finalscore.innerHTML = "Your final score is " + score;
     nextbtn.style.display = "none";
     answerButton.style.display = "none";
     submitbtn.style.display = "block";
-    clearInterval(intervalTracker);
 
-    submitbtn.addEventListener('click', formSubmit);
+    finalscore.innerHTML = "Your final score is " + score;
+  
+    clearInterval(intervalTracker); // stopping timer once score is displayed //
+
+    submitbtn.addEventListener('click', formSubmit); // when initials are submitted //
 }
 
 function formSubmit() {
     var inputInitials = document.getElementById("initials").value;
 
-   highScores = JSON.parse(localStorage.getItem("highscores")) || [];
-    highScores.push({name:inputInitials,score:score});
+    // Retrieving data from Local Storage, null if empty //
+    highScores = JSON.parse(localStorage.getItem("highscores")) || [];
+    highScores.push({ name: inputInitials, score: score });
+
+    // Storing values to Local Storage //
     localStorage.setItem("highscores", JSON.stringify(highScores));
+    
 }
 
 function handleNextButton() {
     questionIndex++;
+    // checks if there are more questions left //
     if (questionIndex < questions.length) {
         showQuestion();
     }
+    // no questions are left //
     else {
         showScore();
     }
@@ -207,8 +210,9 @@ function gameover() {
     nextbtn.style.display = "none";
     answerButton.style.display = "none";
     finishedScreen.style.display = "block";
+
     questionElement.innerHTML = "GAME OVER! Please refresh your page to start again :)";
-    clearInterval(intervalTracker);
+    clearInterval(intervalTracker); // stops timer as game is over //
 }
 
 highscoresbtn.addEventListener('click', displayHighscores);
@@ -216,13 +220,40 @@ highscoresbtn.addEventListener('click', displayHighscores);
 
 function displayHighscores() {
     highscoreScreen.style.display = "block";
-    
-    mainquiz.style.display = "none";
-    
-    console.log(localStorage);
-    highScoresList.innerHTML = JSON.parse(localStorage.getItem("highscores"));
 
-   
+    mainquiz.style.display = "none";
+
+
+    highScores = JSON.parse(localStorage.getItem("highscores")) || [];
+    
+
+    highScores = highScores.sort((a, b) => b.score - a.score); 
+    // sorting the highscores list in descending order by score value //
+
+    for (i = 0; i < highScores.length; i++) {
+        // creating div element for each name initials and their respective scores for styling purpose //
+        var div = document.createElement('div');
+
+        var li = document.createElement('li');
+        var li2 = document.createElement('li2');
+
+        li2 = highScores[i].score;
+
+        li.textContent = highScores[i].name + " scored " + li2;
+       
+        // displaying initials with corresponding score values //
+
+        console.log(li);
+
+
+        div.appendChild(li);
+        div.classList.add('row');
+        highScoresList.appendChild(div);
+
+    }
+
+
 }
+
 
 

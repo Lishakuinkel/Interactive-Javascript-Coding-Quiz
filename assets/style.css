@@ -1,51 +1,51 @@
-*{
+* {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;  
-    font-family:monospace;
-    
+    box-sizing: border-box;
+    font-family: monospace;
+
 }
 
-body{
+body {
     background-color: rgb(195, 152, 188);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-} 
+}
 
-.top-bar{
+.top-bar {
     padding-top: 0px;
     padding-bottom: 25px;
     padding-left: 35px;
 }
 
-.top-bar p{
+.top-bar p {
     color: rgb(45, 48, 45);
     font-size: 1.1em;
     font-style: normal;
     float: right;
     padding-right: 130px;
-    
+
 }
 
-.outer-container{
+.outer-container {
     display: block;
-    padding : 5px;
-    
-}  
+    padding: 5px;
 
-.outer-container h1{
+}
+
+.outer-container h1 {
     text-align: center;
     padding-top: 20px;
-    
+
 }
 
-.top-bar button{
+.top-bar button {
     outline: none;
     background-color: rgb(214, 214, 220);
     font-size: 1.1em;
-    
+
 }
 
-.top-bar button:hover{
+.top-bar button:hover {
     background-color: rgb(155, 143, 192);
 }
 
@@ -62,7 +62,7 @@ body{
     font-size: large;
     color: brown;}*/
 
-.container{
+.container {
     background-color: beige;
     margin: 140px auto 0;
     max-width: 700px;
@@ -71,36 +71,37 @@ body{
     border-radius: 1em;
     font-size: 20px;
     text-align: center;
-    
+    padding-bottom: 25px;
+
 }
 
-.container h1{
+.container h1 {
     font-size: larger;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding-top: 30px;
     padding-bottom: 30px;
-    
+
 }
 
-.container p{
+.container p {
     font-size: medium;
     padding: 0 40px 30px 40px;
     font-style: italic;
 }
 
-#quiz{
+#quiz {
     display: none;
     text-align: center;
     padding-bottom: 40px;
 
 }
 
-#quiz h2{
+#quiz h2 {
     display: block;
     text-align: center;
     padding-top: 40px;
 }
-    
+
 
 
 #answerbuttons {
@@ -111,7 +112,7 @@ body{
     padding: 18px;
 }
 
-#answerbuttons .btn{
+#answerbuttons .btn {
     padding: 10px;
     cursor: pointer;
     width: 100%;
@@ -120,68 +121,97 @@ body{
     display: block;
 }
 
-#btn-start{
+#btn-start {
     padding: 8px;
     font-weight: bolder;
     cursor: pointer;
     margin: auto;
-    
+
+
 }
 
 
-#btn-start:hover{
+#btn-start:hover {
     background-color: cadetblue;
 
-    
+
 }
 
-#btn-next{
-        padding: 8px;
-        font-weight: bolder;
-        cursor: pointer;
-    }
-    
-#btn-next:hover{
-        background-color: cadetblue;
+#btn-next {
+    padding: 8px;
+    font-weight: bolder;
+    cursor: pointer;
 }
 
-.btn:hover:not([disabled]){
+#btn-next:hover {
+    background-color: cadetblue;
+}
+
+.btn:hover:not([disabled]) {
     background-color: rgb(155, 143, 192);
 }
 
-.btn:disabled{
+.btn:disabled {
     cursor: no-drop;
 }
 
 
 
-.correct{
+.correct {
     background: lightgreen;
 }
 
-.incorrect{
+.incorrect {
     background: pink;
 }
 
-#finished-screen{
+#finished-screen {
     display: none;
     flex-direction: column;
     justify-content: center;
     padding-top: 25%;
 }
 
-#highscores-screen{
+#highscores-screen {
     display: none;
     flex-direction: column;
-    justify-content: center;
-    padding-top: 25%;
+    justify-content: space-evenly;
+    padding: 5%;
+    margin-top: 50px;
+    margin-left: 70px;
+    margin-right: 70px;
+    list-style: none;
+    align-items: center;
+    background-color: beige;
+    border-radius: 1rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
 }
 
-#gameover{
+#gameover {
     display: none;
 }
 
-#highscoresheading{
+#highscoresheading {
     text-align: center;
     font-size: 25px;
+}
+
+.row {
+    display: flex;
+    width: 25%;
+
+    justify-content: space-around;
+    margin-top: 16px;
+
+}
+
+#highscoreslist {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 70%;
+
 }

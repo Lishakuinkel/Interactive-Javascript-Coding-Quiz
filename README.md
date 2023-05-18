@@ -2,6 +2,8 @@
 
 A simple, user interactive coding quiz web app where the user will be presented with multiple choice questions and a time constraint. It also stores the user's scores along with their initials and display if the user wants to. 
 
+Live deployed url : https://lishakuinkel.github.io/Interactive-Javascript-Coding-Quiz/
+
 
 ## User Story
 
